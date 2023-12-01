@@ -20,23 +20,23 @@ def parse_numbers_in_line(line):
     while i < len(line):
         if line[i].isdigit():
             temp_number_list.append(line[i])
-        elif line.find('one', i, (i + 3)) >= 0:
+        elif line.find('one', i, i + 3) >= 0:
             temp_number_list.append('1')
-        elif line.find('two', i, (i + 3)) >= 0:
+        elif line.find('two', i, i + 3) >= 0:
             temp_number_list.append('2')
-        elif line.find('three', i, (i + 5)) >= 0:
+        elif line.find('three', i, i + 5) >= 0:
             temp_number_list.append('3')
-        elif line.find('four', i, (i + 4)) >= 0:
+        elif line.find('four', i, i + 4) >= 0:
             temp_number_list.append('4')
-        elif line.find('five', i, (i + 4)) >= 0:
+        elif line.find('five', i, i + 4) >= 0:
             temp_number_list.append('5')
-        elif line.find('six', i, (i + 3)) >= 0:
+        elif line.find('six', i, i + 3) >= 0:
             temp_number_list.append('6')
-        elif line.find('seven', i, (i + 5)) >= 0:
+        elif line.find('seven', i, i + 5) >= 0:
             temp_number_list.append('7')
-        elif line.find('eight', i, (i + 5)) >= 0:
+        elif line.find('eight', i, i + 5) >= 0:
             temp_number_list.append('8')
-        elif line.find('nine', i, (i + 4)) >= 0:
+        elif line.find('nine', i, i + 4) >= 0:
             temp_number_list.append('9')
         i = i + 1
     return (''.join(temp_number_list))
