@@ -5,12 +5,13 @@ def total_value_from_file(file_name, parse_digits_out_of_strings = False):
     with pathlib.Path(file_name).absolute().open() as f:
         for line in f:
             if parse_digits_out_of_strings:
-                line = parse_numbers_in_line(line)
-            temp_string = ''.join(filter(str.isdigit, line))
-            if len(temp_string) == 1:
-                total = total + int(temp_string + temp_string)
+                number_string = parse_numbers_in_line(line)
             else:
-                total = total + int(temp_string[0] + temp_string[-1])
+                number_string = ''.join(filter(str.isdigit, line))
+            if len(number_string) == 1:
+                total = total + int(number_string + number_string)
+            else:
+                total = total + int(number_string[0] + number_string[-1])
     return total
 
 def parse_numbers_in_line(line):
