@@ -39,7 +39,7 @@ def parse_numbers_in_line(line):
         elif line.find('nine', i, i + 4) >= 0:
             temp_number_list.append('9')
         i = i + 1
-    return (''.join(temp_number_list))
+    return ''.join(temp_number_list)
 
 if __name__ == "__main__":
     total = total_value_from_file('day01\\input_example.txt')
