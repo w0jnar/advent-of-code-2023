@@ -9,9 +9,9 @@ def total_value_from_file(file_name, parse_digits_out_of_strings = False):
             else:
                 number_string = ''.join(filter(str.isdigit, line))
             if len(number_string) == 1:
-                total = total + int(number_string + number_string)
+                total += int(number_string + number_string)
             else:
-                total = total + int(number_string[0] + number_string[-1])
+                total += int(number_string[0] + number_string[-1])
     return total
 
 def parse_numbers_in_line(line):
@@ -38,7 +38,7 @@ def parse_numbers_in_line(line):
             temp_number_list.append('8')
         elif line.find('nine', i, i + 4) >= 0:
             temp_number_list.append('9')
-        i = i + 1
+        i += 1
     return ''.join(temp_number_list)
 
 if __name__ == "__main__":
