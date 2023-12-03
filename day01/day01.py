@@ -4,6 +4,7 @@ def total_value_from_file(file_name, parse_digits_out_of_strings = False):
     total = 0
     with pathlib.Path(file_name).absolute().open() as f:
         for line in f:
+            # parse_numbers_in_line already returns just the number so no need to filter again.
             if parse_digits_out_of_strings:
                 number_string = parse_numbers_in_line(line)
             else:
@@ -14,10 +15,12 @@ def total_value_from_file(file_name, parse_digits_out_of_strings = False):
                 total += int(number_string[0] + number_string[-1])
     return total
 
+# Returns a string of just the numbers, parsing out number words.
 def parse_numbers_in_line(line):
     temp_number_list = []
     i = 0
     while i < len(line):
+        # Performance tested. More lines, but the code is faster/more readable (besides word length magic number) than using a dictionary.
         if line[i].isdigit():
             temp_number_list.append(line[i])
         elif line.find('one', i, i + 3) >= 0:
