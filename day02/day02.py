@@ -37,9 +37,12 @@ def evaluate_games_power(game_file_name):
             total += (minimum_red_cubes * minimum_green_cubes * minimum_blue_cubes)
     return total
 
+# Returns list as [game number] followed by the row's games as dictionaries of red/green/blue.
 def parse_game_line(line):
     temp_line_list = line[0:-1].split(':')
+    # Get the game number as the first element of the output list.
     output_list = [int(temp_line_list[0].split(' ')[1])]
+    # Build the dictionaries of colors.
     for game in temp_line_list[1].split(';'):
         temp_list = game.split(',')
         cube_dict = {
