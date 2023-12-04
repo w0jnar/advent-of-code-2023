@@ -4,10 +4,10 @@ def check_scratchcards_for_score(scratchcard_file_name):
     total = 0
     with pathlib.Path(scratchcard_file_name).absolute().open() as f:
         for line in f:
-            total += process_scratchcard_for_points(line)
+            total += process_scratchcard_for_score(line)
     return total
 
-def process_scratchcard_for_points(line):
+def process_scratchcard_for_score(line):
     score = 0
     winning_numbers, our_numbers = get_number_lists(line)
     for number in winning_numbers:
