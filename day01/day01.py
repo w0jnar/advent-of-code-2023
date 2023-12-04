@@ -17,30 +17,26 @@ def total_value_from_file(file_name, parse_digits_out_of_strings = False):
 
 # Returns a string of just the numbers, parsing out number words.
 def parse_numbers_in_line(line):
+    num_dict = {
+        'one': '1',
+        'two': '2',
+        'three': '3',
+        'four': '4',
+        'five': '5',
+        'six': '6',
+        'seven': '7',
+        'eight': '8',
+        'nine': '9'
+    }
     temp_number_list = []
     i = 0
     while i < len(line):
-        # Performance tested. More lines, but the code is faster/more readable (besides word length magic number) than using a dictionary.
         if line[i].isdigit():
             temp_number_list.append(line[i])
-        elif line.find('one', i, i + 3) >= 0:
-            temp_number_list.append('1')
-        elif line.find('two', i, i + 3) >= 0:
-            temp_number_list.append('2')
-        elif line.find('three', i, i + 5) >= 0:
-            temp_number_list.append('3')
-        elif line.find('four', i, i + 4) >= 0:
-            temp_number_list.append('4')
-        elif line.find('five', i, i + 4) >= 0:
-            temp_number_list.append('5')
-        elif line.find('six', i, i + 3) >= 0:
-            temp_number_list.append('6')
-        elif line.find('seven', i, i + 5) >= 0:
-            temp_number_list.append('7')
-        elif line.find('eight', i, i + 5) >= 0:
-            temp_number_list.append('8')
-        elif line.find('nine', i, i + 4) >= 0:
-            temp_number_list.append('9')
+        else:
+            for key in num_dict:
+                if line.find(key, i, i + len(key)) >= 0:
+                    temp_number_list.append(num_dict[key])
         i += 1
     return ''.join(temp_number_list)
 
