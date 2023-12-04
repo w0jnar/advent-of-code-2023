@@ -41,7 +41,7 @@ def evaluate_games_power(game_file_name):
 def parse_game_line(line):
     temp_line_list = line[0:-1].split(':')
     # Get the game number as the first element of the output list.
-    output_list = [int(temp_line_list[0].split(' ')[1])]
+    output_list = [int(temp_line_list[0].split()[1])]
     # Build the dictionaries of colors.
     for game in temp_line_list[1].split(';'):
         temp_list = game.split(',')
@@ -51,7 +51,7 @@ def parse_game_line(line):
             'blue': 0
         }
         for color in temp_list:
-            color_list = color[1:].split(' ')
+            color_list = color[1:].split()
             cube_dict[color_list[1]] = int(color_list[0])
         output_list.append(cube_dict)
     return output_list
