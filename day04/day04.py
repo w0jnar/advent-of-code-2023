@@ -1,4 +1,5 @@
 import pathlib
+from functools import reduce
 
 def check_scratchcards_for_score(scratchcard_file_name):
     total = 0
@@ -19,36 +20,23 @@ def process_scratchcard_for_score(line):
     return score
 
 def check_scratchcards_for_copies(scratchcard_file_name):
-    total = 0
     file_list = []
-    copies_dict = {}
     with pathlib.Path(scratchcard_file_name).absolute().open() as f:
         for line in f:
             file_list.append(line)
     i = 0
+    copies_list = [1] * len(file_list)
     while i < len(file_list):
-        # Add one copy for the line we are about to process.
-        current_line_key = str(i + 1)
-        if current_line_key in copies_dict:
-            copies_dict[current_line_key] += 1
-        else:
-            copies_dict[current_line_key] = 1
         wins = process_scratchcard_for_copies(file_list[i])
         # The max needs to be less than the length of the file, otherwise, we'll go off the scratchcard.
-        max = wins if i + 1 + wins < len(file_list) else len(file_list) - i - 1
+        max = wins if i + wins < len(file_list) else len(file_list) - i
         j = i + 1
-        # Update the dictionary by going key by key for each index after our current by the number of wins, multiplying by our number of copies for the current card.
+        # Update the list by going key by key for each index after our current by the number of wins, multiplying by our number of copies for the current card.
         while j < i + max + 1:
-            copies_to_increase_key = str(j + 1)
-            if copies_to_increase_key in copies_dict:
-                copies_dict[copies_to_increase_key] += 1 * copies_dict.get(current_line_key)
-            else:
-                copies_dict[copies_to_increase_key] = 1 * copies_dict.get(current_line_key)
+            copies_list[j] += 1 * copies_list[i]
             j += 1
-        # 1 for the line being process, and wins for each additional card that comes out of wins.
-        total += 1 + max * copies_dict.get(current_line_key)
         i += 1
-    return total
+    return reduce((lambda x, y: x + y), copies_list)
 
 def process_scratchcard_for_copies(line):
     wins = 0
