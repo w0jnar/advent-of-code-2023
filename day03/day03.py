@@ -118,7 +118,7 @@ def process_adjacent_lines_for_gear_ratio(line, index):
         # Split the string into a list on space.
         # Remove list elements if blank.
         # Cast the strings to int.
-        return [int(x) for x in re.sub("\\D", ' ', current_string).split(' ') if x]
+        return [int(x) for x in re.sub("\\D", ' ', current_string).split()]
     else:
         return []
 

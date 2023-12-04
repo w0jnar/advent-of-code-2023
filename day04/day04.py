@@ -47,11 +47,11 @@ def process_scratchcard_for_copies(line):
     return wins
 
 def get_number_lists(line):
-    # Remove the Game number as well as the new line on the end.
-    temp_card_string = line[line.find(':')+1:-1]
+    # Remove the Game number and colon, leaving just the numbers.
+    temp_card_string = line[line.find(':')+1:]
     temp_list = temp_card_string.split('|')
-    winning_numbers = [int(x) for x in temp_list[0].split(' ') if x]
-    our_numbers = [int(x) for x in temp_list[1].split(' ') if x]
+    winning_numbers = [int(x) for x in temp_list[0].split()]
+    our_numbers = [int(x) for x in temp_list[1].split()]
     return winning_numbers, our_numbers
 
 if __name__ == "__main__":
