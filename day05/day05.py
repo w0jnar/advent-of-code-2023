@@ -97,7 +97,8 @@ def get_value_from_almanac_dict(dictionary, input_value):
         key_upper_range = key_range_list[1]
         if input_value >= key_lower_range and input_value <= key_upper_range:
             value_range_lower = int(dictionary[key].split(',')[0])
-            output = value_range_lower - key_lower_range + input_value
+            offset = value_range_lower - key_lower_range
+            output = offset + input_value
             break
     return output
 
