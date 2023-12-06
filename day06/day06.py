@@ -32,7 +32,6 @@ if __name__ == "__main__":
     margin = calc_margin_of_errors('day06\\input.txt')
     print(margin)
 
-if __name__ == "__main__":
     margin = calc_margin_of_errors_no_spaces('day06\\input_example.txt')
     print(margin)
 
