@@ -6,16 +6,7 @@ def calc_hand_winnings(hands_file_name, use_joker_wild_rule=False):
         for line in f:
             hand_bid_list = line.split()
             poker_hand_node.insert(hand_bid_list[0], hand_bid_list[1])
-    bst_output = []
-    poker_hand_node.in_order(bst_output)
-    bids = [int(x[1]) for x in bst_output]
-    bids.reverse()
-    i = 0
-    winnings = 0
-    while i < len(bids):
-        winnings += bids[i] * (i + 1)
-        i += 1
-    return winnings
+    return poker_hand_node.caclulate_winnings()
 
 class PokerHandBSTNode:
     def __init__(self, use_joker_wild_rule, hand=None, bid=None):
@@ -120,6 +111,18 @@ class PokerHandBSTNode:
         else:
             output_list[0] = 0
         return output_list
+
+    def caclulate_winnings(self):
+        bst_output = []
+        self.in_order(bst_output)
+        bids = [int(x[1]) for x in bst_output]
+        bids.reverse()
+        i = 0
+        winnings = 0
+        while i < len(bids):
+            winnings += bids[i] * (i + 1)
+            i += 1
+        return winnings
 
 if __name__ == "__main__":
     winnings = calc_hand_winnings('day07\\input_example.txt')
