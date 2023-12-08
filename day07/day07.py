@@ -1,5 +1,6 @@
 import pathlib
 
+
 def calc_hand_winnings(hands_file_name, use_joker_wild_rule=False):
     poker_hand_node = PokerHandBSTNode(use_joker_wild_rule)
     with pathlib.Path(hands_file_name).absolute().open() as f:
@@ -7,6 +8,7 @@ def calc_hand_winnings(hands_file_name, use_joker_wild_rule=False):
             hand_bid_list = line.split()
             poker_hand_node.insert(hand_bid_list[0], hand_bid_list[1])
     return poker_hand_node.caclulate_winnings()
+
 
 class PokerHandBSTNode:
     def __init__(self, use_joker_wild_rule, hand=None, bid=None):
@@ -43,8 +45,8 @@ class PokerHandBSTNode:
             self.right.in_order(hands)
         return hands
 
-    # Compare hands as lists, first element of the list being the hand type.
     def if_hand_less_than_self(self, hand):
+        # Compare hands as lists, first element of the list being the hand type.
         self_hand_value_list = self.get_hand_value(self.hand)
         incoming_hand_value_list = self.get_hand_value(hand)
         for i, hand_value in enumerate(self_hand_value_list):
@@ -75,7 +77,8 @@ class PokerHandBSTNode:
             else:
                 card_dict[card] += 1
             output_list.append(values.get(card))
-        # If using the joker wild hand rule and if there are any J and the hand isn't 5 of them, add the number of Js to the existing highest number of occurences.
+        # If using the joker wild hand rule and if there are any J and the hand isn't 5 of them,
+        # add the number of Js to the existing highest number of occurences.
         if self.use_joker_wild_rule and card_dict.get('J', None) is not None and card_dict.get('J', None) != 5:
             j_amount = card_dict.get('J', None)
             del card_dict['J']
@@ -117,6 +120,7 @@ class PokerHandBSTNode:
         for i, bid in enumerate(bids):
             winnings += bid * (i + 1)
         return winnings
+
 
 if __name__ == "__main__":
     winnings = calc_hand_winnings('day07\\input_example.txt')
