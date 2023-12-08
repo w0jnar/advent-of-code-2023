@@ -14,7 +14,7 @@ def evaluate_games(red_cubes, green_cubes, blue_cubes, game_file_name):
                     if i == len(parsed_line_list):
                         total += parsed_line_list[0]
                 else:
-                    i = len(parsed_line_list)
+                    break
     return total
 
 def evaluate_games_power(game_file_name):
