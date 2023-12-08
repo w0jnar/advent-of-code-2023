@@ -25,7 +25,7 @@ class PokerHandBSTNode:
             return
         if self.hand == hand:
             return
-        if self.if_hand_less_than_self(hand):
+        if self._if_hand_less_than_self(hand):
             if self.left:
                 self.left.insert(hand, bid)
                 return
@@ -45,15 +45,15 @@ class PokerHandBSTNode:
             self.right.in_order(hands)
         return hands
 
-    def if_hand_less_than_self(self, hand):
+    def _if_hand_less_than_self(self, hand):
         # Compare hands as lists, first element of the list being the hand type.
-        self_hand_value_list = self.get_hand_value(self.hand)
-        incoming_hand_value_list = self.get_hand_value(hand)
+        self_hand_value_list = self._get_hand_value(self.hand)
+        incoming_hand_value_list = self._get_hand_value(hand)
         for i, hand_value in enumerate(self_hand_value_list):
             if hand_value != incoming_hand_value_list[i]:
                 return hand_value < incoming_hand_value_list[i]
 
-    def get_hand_value(self, hand):
+    def _get_hand_value(self, hand):
         output_list = [-1]
         values = {
             '2': 2,
