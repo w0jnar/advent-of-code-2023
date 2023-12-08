@@ -47,11 +47,9 @@ class PokerHandBSTNode:
     def if_hand_less_than_self(self, hand):
         self_hand_value_list = self.get_hand_value(self.hand)
         incoming_hand_value_list = self.get_hand_value(hand)
-        i = 0
-        while i < len(self_hand_value_list):
-            if self_hand_value_list[i] != incoming_hand_value_list[i]:
-                return self_hand_value_list[i] < incoming_hand_value_list[i]
-            i += 1
+        for i, hand_value in enumerate(self_hand_value_list):
+            if hand_value != incoming_hand_value_list[i]:
+                return hand_value < incoming_hand_value_list[i]
 
     def get_hand_value(self, hand):
         output_list = [-1]
@@ -71,14 +69,12 @@ class PokerHandBSTNode:
         }
         values['J'] = 11 if not self.use_joker_wild_rule else 1
         card_dict = {}
-        i = 0
-        while i < len(hand):
-            if card_dict.get(hand[i], None) is None:
-                card_dict[hand[i]] = 1
+        for _, card in enumerate(hand):
+            if card_dict.get(card, None) is None:
+                card_dict[card] = 1
             else:
-                card_dict[hand[i]] += 1
-            output_list.append(values.get(hand[i]))
-            i += 1
+                card_dict[card] += 1
+            output_list.append(values.get(card))
         # If using the joker wild hand rule and if there are any J and the hand isn't 5 of them, add the number of Js to the existing highest number of occurences.
         if self.use_joker_wild_rule and card_dict.get('J', None) is not None and card_dict.get('J', None) != 5:
             j_amount = card_dict.get('J', None)
@@ -117,11 +113,9 @@ class PokerHandBSTNode:
         self.in_order(bst_output)
         bids = [int(x[1]) for x in bst_output]
         bids.reverse()
-        i = 0
         winnings = 0
-        while i < len(bids):
-            winnings += bids[i] * (i + 1)
-            i += 1
+        for i, bid in enumerate(bids):
+            winnings += bid * (i + 1)
         return winnings
 
 if __name__ == "__main__":
