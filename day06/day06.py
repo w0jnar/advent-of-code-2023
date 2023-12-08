@@ -6,10 +6,8 @@ def calc_margin_of_errors(races_file_name):
         time_list = [int(x) for x in f.readline().split(':')[1].split()]
         distance_list = [int(x) for x in f.readline().split(':')[1].split()]
     margin_list = []
-    i = 0
-    while i < len(time_list):
-        margin_list.append(calc_margin_of_error(time_list[i], distance_list[i]))
-        i += 1
+    for i, time in enumerate(time_list):
+        margin_list.append(calc_margin_of_error(time, distance_list[i]))
     return reduce((lambda x, y: x * y), margin_list)
 
 def calc_margin_of_errors_no_spaces(races_file_name):
