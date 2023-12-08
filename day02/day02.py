@@ -1,5 +1,6 @@
 import pathlib
 
+
 def evaluate_games(red_cubes, green_cubes, blue_cubes, game_file_name):
     total = 0
     with pathlib.Path(game_file_name).absolute().open() as f:
@@ -9,13 +10,14 @@ def evaluate_games(red_cubes, green_cubes, blue_cubes, game_file_name):
             while i < len(parsed_line_list):
                 if (parsed_line_list[i]['red'] <= red_cubes and
                     parsed_line_list[i]['green'] <= green_cubes and
-                    parsed_line_list[i]['blue'] <= blue_cubes):
+                        parsed_line_list[i]['blue'] <= blue_cubes):
                     i += 1
                     if i == len(parsed_line_list):
                         total += parsed_line_list[0]
                 else:
                     break
     return total
+
 
 def evaluate_games_power(game_file_name):
     total = 0
@@ -34,11 +36,13 @@ def evaluate_games_power(game_file_name):
                 if minimum_blue_cubes < parsed_line_list[i]['blue']:
                     minimum_blue_cubes = parsed_line_list[i]['blue']
                 i += 1
-            total += (minimum_red_cubes * minimum_green_cubes * minimum_blue_cubes)
+            total += (minimum_red_cubes *
+                      minimum_green_cubes * minimum_blue_cubes)
     return total
 
-# Returns list as [game number] followed by the row's games as dictionaries of red/green/blue.
+
 def parse_game_line(line):
+    # Returns list as [game number] followed by the row's games as dictionaries of red/green/blue.
     temp_line_list = line[0:-1].split(':')
     # Get the game number as the first element of the output list.
     output_list = [int(temp_line_list[0].split()[1])]
@@ -56,14 +60,17 @@ def parse_game_line(line):
         output_list.append(cube_dict)
     return output_list
 
+
 if __name__ == "__main__":
     red_cubes = 12
     green_cubes = 13
     blue_cubes = 14
-    total = evaluate_games(red_cubes, green_cubes, blue_cubes, 'day02\\input_example.txt')
+    total = evaluate_games(red_cubes, green_cubes,
+                           blue_cubes, 'day02\\input_example.txt')
     print(total)
 
-    total = evaluate_games(red_cubes, green_cubes, blue_cubes, 'day02\\input.txt')
+    total = evaluate_games(red_cubes, green_cubes,
+                           blue_cubes, 'day02\\input.txt')
     print(total)
 
     total = evaluate_games_power('day02\\input_example.txt')

@@ -1,6 +1,7 @@
 import pathlib
 
-def total_value_from_file(file_name, parse_digits_out_of_strings = False):
+
+def total_value_from_file(file_name, parse_digits_out_of_strings=False):
     total = 0
     with pathlib.Path(file_name).absolute().open() as f:
         for line in f:
@@ -15,8 +16,9 @@ def total_value_from_file(file_name, parse_digits_out_of_strings = False):
                 total += int(number_string[0] + number_string[-1])
     return total
 
-# Returns a string of just the numbers, parsing out number words.
+
 def parse_numbers_in_line(line):
+    # Returns a string of just the numbers, parsing out number words.
     num_dict = {
         'one': '1',
         'two': '2',
@@ -37,6 +39,7 @@ def parse_numbers_in_line(line):
                 if line.find(key, i, i + len(key)) >= 0:
                     temp_number_list.append(num_dict[key])
     return ''.join(temp_number_list)
+
 
 if __name__ == "__main__":
     total = total_value_from_file('day01\\input_example.txt')

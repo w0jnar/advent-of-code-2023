@@ -1,7 +1,8 @@
 import pathlib
 import re
 
-def check_engine(engine_file_name, is_gear_ratio = False):
+
+def check_engine(engine_file_name, is_gear_ratio=False):
     total = 0
     # Read all the lines into a list for easy current/previous/next manipulation.
     file_list = []
@@ -16,10 +17,12 @@ def check_engine(engine_file_name, is_gear_ratio = False):
         if not is_gear_ratio:
             total += process_lines_for_engine(line, previous_line, next_line)
         else:
-            total += process_lines_for_gear_ratio(line, previous_line, next_line)
+            total += process_lines_for_gear_ratio(line,
+                                                  previous_line, next_line)
         previous_line = line
         i += 1
     return total
+
 
 def process_lines_for_engine(line, previous_line, next_line):
     total = 0
@@ -47,7 +50,7 @@ def process_lines_for_engine(line, previous_line, next_line):
                     if ((i - 1 >= 0 and regex.search(line[i - 1])) or
                         (j + 1 < len(line) and regex.search(line[j])) or
                         (previous_line is not None and regex.search(previous_line[min:max])) or
-                        (next_line is not None and regex.search(next_line[min:max]))):
+                            (next_line is not None and regex.search(next_line[min:max]))):
                         is_adjacent = True
                     if is_adjacent:
                         total += int(current_num_string)
@@ -56,6 +59,7 @@ def process_lines_for_engine(line, previous_line, next_line):
         else:
             i += 1
     return total
+
 
 def process_lines_for_gear_ratio(line, previous_line, next_line):
     total = 0
@@ -83,17 +87,20 @@ def process_lines_for_gear_ratio(line, previous_line, next_line):
                 gear_adjacent_list.append(int(current_num_string))
             # Previous line.
             if previous_line is not None:
-                gear_adjacent_list += process_adjacent_lines_for_gear_ratio(previous_line, i)
+                gear_adjacent_list += process_adjacent_lines_for_gear_ratio(
+                    previous_line, i)
             # Next line.
             if next_line is not None:
-                gear_adjacent_list += process_adjacent_lines_for_gear_ratio(next_line, i)
+                gear_adjacent_list += process_adjacent_lines_for_gear_ratio(
+                    next_line, i)
             if len(gear_adjacent_list) == 2:
                 total += gear_adjacent_list[0] * gear_adjacent_list[1]
         i += 1
     return total
 
-# Process the input line (either previous or next), returning a list of 0/1/2 possible adjacent numbers.
+
 def process_adjacent_lines_for_gear_ratio(line, index):
+    # Process the input line (either previous or next), returning a list of 0/1/2 possible adjacent numbers.
     min = index - 1 if index - 1 >= 0 else index
     max = index + 1 if index + 1 < len(line) else index
     # Check the up to 3 characters adjacent (either above or below) if there are any digits.
@@ -121,6 +128,7 @@ def process_adjacent_lines_for_gear_ratio(line, index):
         return [int(x) for x in re.sub("\\D", ' ', current_string).split()]
     else:
         return []
+
 
 if __name__ == "__main__":
     total = check_engine('day03\\input_example.txt')

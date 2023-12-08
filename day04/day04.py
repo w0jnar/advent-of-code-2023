@@ -1,12 +1,14 @@
 import pathlib
 from functools import reduce
 
+
 def check_scratchcards_for_score(scratchcard_file_name):
     total = 0
     with pathlib.Path(scratchcard_file_name).absolute().open() as f:
         for line in f:
             total += process_scratchcard_for_score(line)
     return total
+
 
 def process_scratchcard_for_score(line):
     score = 0
@@ -18,6 +20,7 @@ def process_scratchcard_for_score(line):
             else:
                 score *= 2
     return score
+
 
 def check_scratchcards_for_copies(scratchcard_file_name):
     file_list = []
@@ -38,6 +41,7 @@ def check_scratchcards_for_copies(scratchcard_file_name):
         i += 1
     return reduce((lambda x, y: x + y), copies_list)
 
+
 def process_scratchcard_for_copies(line):
     wins = 0
     winning_numbers, our_numbers = get_number_lists(line)
@@ -46,6 +50,7 @@ def process_scratchcard_for_copies(line):
             wins += 1
     return wins
 
+
 def get_number_lists(line):
     # Remove the Game number and colon, leaving just the numbers.
     temp_card_string = line[line.find(':')+1:]
@@ -53,6 +58,7 @@ def get_number_lists(line):
     winning_numbers = [int(x) for x in temp_list[0].split()]
     our_numbers = [int(x) for x in temp_list[1].split()]
     return winning_numbers, our_numbers
+
 
 if __name__ == "__main__":
     total = check_scratchcards_for_score('day04\\input_example.txt')

@@ -1,6 +1,7 @@
 import math
 import pathlib
 
+
 def trace_route(map_file_name):
     map_dictionary = {}
     with pathlib.Path(map_file_name).absolute().open() as f:
@@ -19,6 +20,7 @@ def trace_route(map_file_name):
             map_line = f.readline()
     return process_route(route, first_key, map_dictionary)
 
+
 def process_route(route, first_key, map_dictionary):
     steps = 0
     index = 0
@@ -31,6 +33,7 @@ def process_route(route, first_key, map_dictionary):
         index += 1
         if index > len(route) - 1:
             index -= len(route)
+
 
 def trace_multiple_routes(map_file_name):
     map_dictionary = {}
@@ -49,10 +52,11 @@ def trace_multiple_routes(map_file_name):
     key_list = [key for key in list(map_dictionary.keys()) if key[2] == 'A']
     return process_multiple_routes(route, key_list, map_dictionary)
 
-# Get the lowest step for each key, then return the LCM of those steps.
-# This won't work for all theoretical inputs, but due to the nature of the paths of my input,
-# and likely other AoC inputs assuming similiar generation, this works.
+
 def process_multiple_routes(route, key_list, map_dictionary):
+    # Get the lowest step for each key, then return the LCM of those steps.
+    # This won't work for all theoretical inputs, but due to the nature of the paths of my input,
+    # and likely other AoC inputs assuming similiar generation, this works.
     step_list = []
     for key in key_list:
         key_found = False
@@ -69,6 +73,7 @@ def process_multiple_routes(route, key_list, map_dictionary):
             if route_index > len(route) - 1:
                 route_index -= len(route)
     return math.lcm(*step_list)
+
 
 if __name__ == "__main__":
     output = trace_route('day08\\input_example.txt')
