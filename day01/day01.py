@@ -29,15 +29,13 @@ def parse_numbers_in_line(line):
         'nine': '9'
     }
     temp_number_list = []
-    i = 0
-    while i < len(line):
-        if line[i].isdigit():
-            temp_number_list.append(line[i])
+    for i, character in enumerate(line):
+        if character.isdigit():
+            temp_number_list.append(character)
         else:
             for key in num_dict:
                 if line.find(key, i, i + len(key)) >= 0:
                     temp_number_list.append(num_dict[key])
-        i += 1
     return ''.join(temp_number_list)
 
 if __name__ == "__main__":
