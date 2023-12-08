@@ -92,7 +92,7 @@ def build_almanac_dicts(file_list):
 def build_almanac_dict(file_list, index, dictionary):
     # Build the individual dictionaries from the file blocks.
     i = index + 1
-    while i < len(file_list) and len(file_list[i]) > 1:
+    while i < len(file_list) and len(file_list[i]) > 0:
         map_line = [int(x) for x in file_list[i].split()]
         destination_range = map_line[0]
         source_range = map_line[1]
