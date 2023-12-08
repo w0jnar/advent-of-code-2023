@@ -50,6 +50,8 @@ def trace_multiple_routes(map_file_name):
     return process_multiple_routes(route, key_list, map_dictionary)
 
 # Get the lowest step for each key, then return the LCM of those steps.
+# This won't work for all theoretical inputs, but due to the nature of the paths of my input,
+# and likely other AoC inputs assuming similiar generation, this works.
 def process_multiple_routes(route, key_list, map_dictionary):
     step_list = []
     for key in key_list:
