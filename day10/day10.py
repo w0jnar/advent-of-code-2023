@@ -17,6 +17,7 @@ class PipeMap:
         self.map_dict = {}
         self.s_x = None
         self.s_y = None
+        self.s_char = None
 
     def generate_map_list(self):
         with pathlib.Path(self.map_file_name).absolute().open() as f:
@@ -28,6 +29,7 @@ class PipeMap:
         self.find_s()
         s_pos = self.format_dict_string(self.s_y, self.s_x)
         current_1, current_2 = self.find_next_from_s()
+        self.find_s_char(current_1, current_2)
         previous_1 = s_pos
         previous_2 = s_pos
         step = 1
@@ -109,19 +111,53 @@ class PipeMap:
 
     def find_area(self):
         # Loop through the list, toggling between inside and and not inside based on when we are next to an opening or closing edge pipe.
-        # TODO: Programmatic way to find the S replacement rather than just hard coding it based on my input.
-        temp_string = self.map_list[self.s_y].replace('S', 'L')
-        self.map_list[self.s_y] = temp_string
+        # Copy the map to leave S in place.
+        map_copy = self.map_list.copy()
+        temp_string = map_copy[self.s_y].replace('S', self.s_char)
+        map_copy[self.s_y] = temp_string
         area = 0
-        for i, line in enumerate(self.map_list):
+        for i, line in enumerate(map_copy):
             inside = False
             for j, _ in enumerate(line):
                 if self.map_dict.get(self.format_dict_string(i, j), None) is not None:
-                    if self.map_list[i][j] in ('|', 'J', 'L'):
+                    if map_copy[i][j] in ('|', 'J', 'L'):
                         inside = not inside
                 else:
                     area += inside
         return area
+
+    def find_s_char(self, current_1, current_2):
+        # Figure out which character should be in S position for area.
+        # Find the 4 coordinates around S, then figure out where the 2 coords are in regard to S,
+        # aka, North/South/East/West of S.
+        north_coord = self.format_dict_string((self.s_y - 1), self.s_x)
+        south_coord = self.format_dict_string((self.s_y + 1), self.s_x)
+        west_coord = self.format_dict_string(self.s_y, (self.s_x - 1))
+        east_coord = self.format_dict_string(self.s_y, (self.s_x + 1))
+        is_north = False
+        is_south = False
+        is_west = False
+        is_east = False
+        if north_coord in (current_1, current_2):
+            is_north = True
+        if south_coord in (current_1, current_2):
+            is_south = True
+        if west_coord in (current_1, current_2):
+            is_west = True
+        if east_coord in (current_1, current_2):
+            is_east = True
+        if is_north and is_south:
+            self.s_char = '|'
+        elif is_east and is_west:
+            self.s_char = '-'
+        elif is_north and is_east:
+            self.s_char = 'L'
+        elif is_north and is_west:
+            self.s_char = 'J'
+        elif is_south and is_west:
+            self.s_char = '7'
+        elif is_south and is_east:
+            self.s_char = 'F'
 
 
 if __name__ == "__main__":
