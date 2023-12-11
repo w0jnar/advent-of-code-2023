@@ -1,9 +1,6 @@
-import pathlib
-
-
 def check_almanac(almanac_file_name):
     file_list = []
-    with pathlib.Path(almanac_file_name).absolute().open() as f:
+    with open(almanac_file_name) as f:
         for line in f:
             file_list.append(line[:-1])
     # Build dictionaries from file_list.
@@ -33,7 +30,7 @@ def check_almanac(almanac_file_name):
 
 def check_almanac_reverse(almanac_file_name):
     file_list = []
-    with pathlib.Path(almanac_file_name).absolute().open() as f:
+    with open(almanac_file_name) as f:
         for line in f:
             file_list.append(line[:-1])
     # Build dictionaries from file_list.

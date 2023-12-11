@@ -1,10 +1,9 @@
-import pathlib
 from functools import reduce
 
 
 def check_scratchcards_for_score(scratchcard_file_name):
     total = 0
-    with pathlib.Path(scratchcard_file_name).absolute().open() as f:
+    with open(scratchcard_file_name) as f:
         for line in f:
             total += process_scratchcard_for_score(line)
     return total
@@ -24,7 +23,7 @@ def process_scratchcard_for_score(line):
 
 def check_scratchcards_for_copies(scratchcard_file_name):
     file_list = []
-    with pathlib.Path(scratchcard_file_name).absolute().open() as f:
+    with open(scratchcard_file_name) as f:
         for line in f:
             file_list.append(line)
     i = 0

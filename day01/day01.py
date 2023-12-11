@@ -1,9 +1,6 @@
-import pathlib
-
-
 def total_value_from_file(file_name, parse_digits_out_of_strings=False):
     total = 0
-    with pathlib.Path(file_name).absolute().open() as f:
+    with open(file_name) as f:
         for line in f:
             # parse_numbers_in_line already returns just the number so no need to filter again.
             if parse_digits_out_of_strings:

@@ -1,9 +1,6 @@
-import pathlib
-
-
 def calc_hand_winnings(hands_file_name, use_joker_wild_rule=False):
     poker_hand_node = PokerHandBSTNode(use_joker_wild_rule)
-    with pathlib.Path(hands_file_name).absolute().open() as f:
+    with open(hands_file_name) as f:
         for line in f:
             hand_bid_list = line.split()
             poker_hand_node.insert(hand_bid_list[0], hand_bid_list[1])

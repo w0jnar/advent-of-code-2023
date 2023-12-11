@@ -1,9 +1,8 @@
-import pathlib
 from functools import reduce
 
 
 def calc_margin_of_errors(races_file_name):
-    with pathlib.Path(races_file_name).absolute().open() as f:
+    with open(races_file_name) as f:
         time_list = [int(x) for x in f.readline().split(':')[1].split()]
         distance_list = [int(x) for x in f.readline().split(':')[1].split()]
     margin_list = []
@@ -13,7 +12,7 @@ def calc_margin_of_errors(races_file_name):
 
 
 def calc_margin_of_errors_no_spaces(races_file_name):
-    with pathlib.Path(races_file_name).absolute().open() as f:
+    with open(races_file_name) as f:
         time = int(''.join(filter(str.isdigit, f.readline())))
         distance = int(''.join(filter(str.isdigit, f.readline())))
     return calc_margin_of_error(time, distance)
