@@ -1,10 +1,9 @@
 import math
-import pathlib
 
 
 def trace_route(map_file_name):
     map_dictionary = {}
-    with pathlib.Path(map_file_name).absolute().open() as f:
+    with open(map_file_name) as f:
         # Convert Ls and Rs to 0s and 1s for later list indexing. Remove end newline.
         route = f.readline().replace('L', '0').replace('R', '1')[:-1]
         # Skip blank line.
@@ -37,7 +36,7 @@ def process_route(route, first_key, map_dictionary):
 
 def trace_multiple_routes(map_file_name):
     map_dictionary = {}
-    with pathlib.Path(map_file_name).absolute().open() as f:
+    with open(map_file_name) as f:
         # Convert Ls and Rs to 0s and 1s for later list indexing. Remove end newline.
         route = f.readline().replace('L', '0').replace('R', '1')[:-1]
         # Skip blank line.

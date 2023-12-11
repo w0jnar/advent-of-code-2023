@@ -1,4 +1,3 @@
-import pathlib
 import re
 
 
@@ -6,7 +5,7 @@ def check_engine(engine_file_name, is_gear_ratio=False):
     total = 0
     # Read all the lines into a list for easy current/previous/next manipulation.
     file_list = []
-    with pathlib.Path(engine_file_name).absolute().open() as f:
+    with open(engine_file_name) as f:
         for line in f:
             file_list.append(line)
     i = 0

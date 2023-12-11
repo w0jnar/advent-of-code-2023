@@ -1,9 +1,6 @@
-import pathlib
-
-
 def evaluate_games(red_cubes, green_cubes, blue_cubes, game_file_name):
     total = 0
-    with pathlib.Path(game_file_name).absolute().open() as f:
+    with open(game_file_name) as f:
         for line in f:
             parsed_line_list = parse_game_line(line)
             i = 1
@@ -21,7 +18,7 @@ def evaluate_games(red_cubes, green_cubes, blue_cubes, game_file_name):
 
 def evaluate_games_power(game_file_name):
     total = 0
-    with pathlib.Path(game_file_name).absolute().open() as f:
+    with open(game_file_name) as f:
         for line in f:
             parsed_line_list = parse_game_line(line)
             minimum_red_cubes = 0

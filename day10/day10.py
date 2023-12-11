@@ -1,6 +1,3 @@
-import pathlib
-
-
 def map_distance(map_file_name):
     pipe_map = PipeMap(map_file_name)
     pipe_map.generate_map_list()
@@ -20,7 +17,7 @@ class PipeMap:
         self.s_char = None
 
     def generate_map_list(self):
-        with pathlib.Path(self.map_file_name).absolute().open() as f:
+        with open(self.map_file_name) as f:
             for line in f:
                 self.map_list.append(line[:-1])
 

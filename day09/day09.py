@@ -1,10 +1,9 @@
-import pathlib
 from functools import reduce
 
 
 def extrapolate_lines(sensor_file_name, is_reverse=False):
     output_list = []
-    with pathlib.Path(sensor_file_name).absolute().open() as f:
+    with open(sensor_file_name) as f:
         for line in f:
             output_list.append(calc_next(line, is_reverse))
     return reduce((lambda x, y: x + y), output_list)
